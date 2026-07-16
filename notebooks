@@ -4,7 +4,7 @@
   "metadata": {
     "colab": {
       "provenance": [],
-      "authorship_tag": "ABX9TyOVT5Xofy3rtng+MVrIKVu9",
+      "authorship_tag": "ABX9TyPT1NMPoy2RLLSJ9BsGrFuB",
       "include_colab_link": true
     },
     "kernelspec": {
@@ -316,6 +316,58 @@
         "print(f\"Train shape: {train_df.shape}\")\n",
         "print(f\"Test shape: {test_df.shape}\")\n",
         "train_df.head()"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "FpprnoxxvC8w"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 4,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "b86bc0a1",
+        "outputId": "b70f9b1a-28a6-4687-9c28-eef9c7afe7b7"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Missing values before cleaning:\n",
+            "ca      0\n",
+            "thal    0\n",
+            "dtype: int64\n",
+            "\n",
+            "Missing values after cleaning:\n",
+            "ca      0\n",
+            "thal    0\n",
+            "dtype: int64\n",
+            "\n",
+            "Data cleaning complete.\n"
+          ]
+        }
+      ],
+      "source": [
+        "print(\"Missing values before cleaning:\")\n",
+        "print(train_df[['ca', 'thal']].isnull().sum())\n",
+        "\n",
+        "train_df['ca'] = train_df['ca'].fillna(train_df['ca'].median())\n",
+        "train_df['thal'] = train_df['thal'].fillna(train_df['thal'].median())\n",
+        "test_df['ca'] = test_df['ca'].fillna(test_df['ca'].median())\n",
+        "test_df['thal'] = test_df['thal'].fillna(test_df['thal'].median())\n",
+        "\n",
+        "print(\"\\nMissing values after cleaning:\")\n",
+        "print(train_df[['ca', 'thal']].isnull().sum())\n",
+        "print(\"\\nData cleaning complete.\")"
       ]
     }
   ]
