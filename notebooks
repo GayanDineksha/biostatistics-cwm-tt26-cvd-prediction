@@ -4,7 +4,7 @@
   "metadata": {
     "colab": {
       "provenance": [],
-      "authorship_tag": "ABX9TyOeyJ3+tlXd1bLqoOq7pYpj",
+      "authorship_tag": "ABX9TyMr7o7yH0XzZ+Cw/XZZt1oa",
       "include_colab_link": true
     },
     "kernelspec": {
@@ -926,6 +926,35 @@
             "dtype: float64\n"
           ]
         }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 18,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "f76d8965",
+        "outputId": "c5eefb53-eb49-4a95-ef62-7f0ec77752d5"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Saved: rf_model.joblib, scaler.joblib, nn_model.keras\n"
+          ]
+        }
+      ],
+      "source": [
+        "import joblib\n",
+        "\n",
+        "joblib.dump(rf_model, 'rf_model.joblib')\n",
+        "joblib.dump(scaler, 'scaler.joblib')\n",
+        "nn_model.save('nn_model.keras')\n",
+        "\n",
+        "print(\"Saved: rf_model.joblib, scaler.joblib, nn_model.keras\")"
       ]
     }
   ]
