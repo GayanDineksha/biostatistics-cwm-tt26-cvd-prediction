@@ -4,7 +4,7 @@
   "metadata": {
     "colab": {
       "provenance": [],
-      "authorship_tag": "ABX9TyNH09i1bD3hNIFWXjyAYrVm",
+      "authorship_tag": "ABX9TyPIvzbI4yeT8ZbBtsoiOlOm",
       "include_colab_link": true
     },
     "kernelspec": {
@@ -645,6 +645,65 @@
         "print(f\"Training set: {X_train.shape[0]} patients\")\n",
         "print(f\"Test set: {X_test.shape[0]} patients\")\n",
         "print(f\"Class balance (train): {y_train.value_counts(normalize=True).round(3).to_dict()}\")"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "VpsBlnCFys5F"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 12,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "77ec2ceb",
+        "outputId": "95c9e73a-a7e6-4413-c3ac-c4dada295e62"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "=== Baseline Model: Random Forest ===\n",
+            "Accuracy: 81.63%\n",
+            "ROC-AUC: 0.888\n",
+            "\n",
+            "Detailed Classification Report:\n",
+            "               precision    recall  f1-score   support\n",
+            "\n",
+            "           0       0.82      0.85      0.84        27\n",
+            "           1       0.81      0.77      0.79        22\n",
+            "\n",
+            "    accuracy                           0.82        49\n",
+            "   macro avg       0.82      0.81      0.81        49\n",
+            "weighted avg       0.82      0.82      0.82        49\n",
+            "\n"
+          ]
+        }
+      ],
+      "source": [
+        "from sklearn.ensemble import RandomForestClassifier\n",
+        "from sklearn.metrics import classification_report, accuracy_score, roc_auc_score\n",
+        "\n",
+        "rf_model = RandomForestClassifier(n_estimators=100, random_state=SEED)\n",
+        "rf_model.fit(X_train_scaled, y_train)\n",
+        "\n",
+        "rf_predictions = rf_model.predict(X_test_scaled)\n",
+        "rf_probs = rf_model.predict_proba(X_test_scaled)[:, 1]\n",
+        "rf_accuracy = accuracy_score(y_test, rf_predictions)\n",
+        "rf_auc = roc_auc_score(y_test, rf_probs)\n",
+        "\n",
+        "print(\"=== Baseline Model: Random Forest ===\")\n",
+        "print(f\"Accuracy: {rf_accuracy * 100:.2f}%\")\n",
+        "print(f\"ROC-AUC: {rf_auc:.3f}\\n\")\n",
+        "print(\"Detailed Classification Report:\\n\", classification_report(y_test, rf_predictions))"
       ]
     }
   ]
